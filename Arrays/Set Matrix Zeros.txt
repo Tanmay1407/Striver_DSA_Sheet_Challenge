@@ -1,0 +1,58 @@
+Problem Statement: Given a matrix if an element in the matrix is 0 then you will have to set its entire column and row to 0 and then return the matrix.
+-------------------------------------------------------------------------------------------------------------------------------------
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static void setZeros(int matrix[][]) {
+        // Write your code here..
+
+        // T.C : O(m*n + m*n)
+        // Using Extra-space
+
+        HashSet<Integer> rowSet = new HashSet<>();
+        HashSet<Integer> colSet = new HashSet<>();
+
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                if(matrix[i][j] == 0){
+                    rowSet.add(i);
+                    colSet.add(j);
+                }
+            }
+        }
+
+         for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                if(rowSet.contains(i) || colSet.contains(j)) matrix[i][j] = 0;
+            }
+        }
+
+        // Without using Extra-space 
+
+        boolean colB = false; 
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for(int i = 0; i<rows; i++){
+            if(matrix[i][0] == 0) colB = true; 
+
+            for(int j = 1; j<cols; j++){
+               if(matrix[i][j] == 0){
+                   matrix[i][0] = 0;
+                   matrix[0][j] = 0;
+               }
+            }
+        }
+
+         for(int i = rows-1; i>=0; i--){
+            for(int j = cols-1; j>=1; j--){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0) matrix[i][j] = 0;
+            }
+            if(colB) matrix[i][0] = 0;
+        }
+
+
+    }
+
+}
