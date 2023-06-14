@@ -1,0 +1,29 @@
+Maximum Subarray Sum :
+------------------------------------------------------------------------
+
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	
+	public static long maxSubarraySum(int[] arr, int n) {
+		// write your code here
+		long maxSum = 0;
+		long curSum = 0;
+
+		// Time Complexity : O(n)
+
+		for(int i = 0; i < arr.length; i++){
+			curSum += arr[i];
+
+			if(curSum < arr[i]){
+				curSum = arr[i];
+			}
+
+			if(curSum > maxSum) maxSum = curSum;
+		}
+
+		return maxSum;
+	}
+
+}
